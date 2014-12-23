@@ -1,0 +1,33 @@
+{
+  "name": "soa-example-logging-service",
+  "version": "0.0.0",
+  "description": "Sample logging service in soa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danbucholtz/soa-example-logging-service.git"
+  },
+  "author": "Dan Bucholtz",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/danbucholtz/soa-example-logging-service/issues"
+  },
+  "homepage": "https://github.com/danbucholtz/soa-example-logging-service",
+    "dependencies": {
+        "connect": "2.14.2",
+        "connect-redis" : "1.4.x",
+        "ejs": "0.8.5",
+        "express": "3.*",
+        "mongoose": "3.8.8",
+        "node-uuid" : "1.4.1",
+        "passport": "*",
+        "passport-local": "*",
+        "q" : "1.0.1",
+        "soa-example-core-service": "git://github.com/danbucholtz/soa-example-core-service",
+        "soa-example-service-config": "git://github.com/danbucholtz/soa-example-service-config",
+        "soa-example-core-utils": "git://github.com/danbucholtz/soa-example-core-utils"
+    }
+}
