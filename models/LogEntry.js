@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var LogEntrySchema = new mongoose.Schema({
-	level: String,
+	level: Number,
     message : String,
     userId: String,
 	created: { type: Date, default: Date.now }

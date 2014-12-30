@@ -2,12 +2,12 @@ var Q = require("q");
 
 var LogEntry = require("../models/LogEntry");
 
-var createEntry = function(req, res){
+var createUserEntry = function(req, res){
 	var user = req.user;
 	var level = req.body.level;
 	var message = req.body.message;
 
-	createEntryInternal(user, level, message).then(function(entity){
+	createUserEntryInternal(user, level, message).then(function(entity){
 		res.send(entity);
 	});
 };
@@ -19,7 +19,7 @@ var getEntriesByUser = function(req, res){
 	});
 };
 
-var createEntryInternal = function(user, level, message){
+var createUserEntryInternal = function(user, level, message){
 	var deferred = Q.defer();
 
 	var logEntry = new LogEntry();
@@ -36,7 +36,7 @@ var createEntryInternal = function(user, level, message){
 	return deferred.promise;
 };
 
-var getLogEntries = function(){
+var getUserEntries = function(){
 	var deferred = Q.defer();
 
 	LogEntry.find(function(err, entities){
@@ -68,6 +68,7 @@ var getLogEntriesByUser = function(userId){
 };
 
 module.exports = {
-	createEntry: createEntry,
-	getEntriesByUser: getEntriesByUser
+	createUserEntry: createUserEntry,
+	getUserEntries: getUserEntries,
+	getUserEntries: getUserEntries
 };
