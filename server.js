@@ -8,6 +8,4 @@ mongoose.connect(config.mongoUri);
 
 var app = service.createApiServer(config.loggingServicePort);
 
-app.post('/userEntries', logEntryController.createUserEntry);
-app.get('/userEntries', service.ensureAuthenticated, logEntryController.getUserEntries);
-app.get('/userEntries/:userId', service.ensureAuthenticated, logEntryController.getEntriesByUser);
+app.post('/log', service.ensureAuthenticated, logEntryController.createEntry);

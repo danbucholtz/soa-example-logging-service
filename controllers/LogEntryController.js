@@ -2,20 +2,13 @@ var Q = require("q");
 
 var LogEntry = require("../models/LogEntry");
 
-var createUserEntry = function(req, res){
+var createEntry = function(req, res){
 	var user = req.user;
 	var level = req.body.level;
 	var message = req.body.message;
 
 	createUserEntryInternal(user, level, message).then(function(entity){
 		res.send(entity);
-	});
-};
-
-var getEntriesByUser = function(req, res){
-	var userId = req.user_id;
-	getLogEntriesByUser(userId).then(function(entities){
-		res.send(entities);
 	});
 };
 
@@ -29,6 +22,8 @@ var createUserEntryInternal = function(user, level, message){
 	logEntry.message = message;
 	logEntry.created = new Date();
 
+	logToConsole(user.emailAddress, level, message);
+
 	logEntry.save(function(err, logEntryEntity){
 		deferred.resolve(logEntryEntity);
 	});
@@ -36,39 +31,10 @@ var createUserEntryInternal = function(user, level, message){
 	return deferred.promise;
 };
 
-var getUserEntries = function(){
-	var deferred = Q.defer();
-
-	LogEntry.find(function(err, entities){
-		if ( err ){
-			deferred.reject(err);
-		}
-		else{
-			deferred.resolve(entities);
-		}
-	});
-
-	return deferred.promise;
-};
-
-var getLogEntriesByUser = function(userId){
-
-	var deferred = Q.defer();
-
-	LogEntry.find({userId: userId}, function(err, entities){
-		if ( err ){
-			deferred.reject(err);
-		}
-		else{
-			deferred.resolve(entities);
-		}
-	});
-
-	return deferred.promise;
+var logToConsole = function(emailAddress, level, message){
+	console.log(emailAddress + ": " + message);
 };
 
 module.exports = {
-	createUserEntry: createUserEntry,
-	getUserEntries: getUserEntries,
-	getUserEntries: getUserEntries
+	createEntry: createEntry
 };
